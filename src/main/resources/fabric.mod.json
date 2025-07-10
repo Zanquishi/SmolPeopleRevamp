@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "smolpeople",
+  "version": "1.0.0",
+  "name": "SmolPeople",
+  "description": "Makes players appear visually smaller",
+  "authors": [
+    "Teleboom"
+  ],
+  "contact": {
+    "homepage": "https://github.com/teleboom/smolpeople",
+    "sources": "https://github.com/teleboom/smolpeople"
+  },
+  "license": "MIT",
+  "icon": "assets/smolpeople/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.teleboom.smolpeople.SmolPeopleClient"
+    ]
+  },
+  "mixins": [
+    "smolpeople.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.12.4"
+  }
+}
