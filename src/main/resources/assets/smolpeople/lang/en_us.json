@@ -1,0 +1,8 @@
+{
+  "key.smolpeople.config": "Open SmolPeople Config",
+  "category.smolpeople": "SmolPeople",
+  "gui.smolpeople.config.title": "SmolPeople Configuration",
+  "gui.smolpeople.description": "Make players appear smaller visually",
+  "gui.smolpeople.scale": "Scale Factor: %s",
+  "gui.smolpeople.enabled": "Enabled: %s"
+}
