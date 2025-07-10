@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -43,7 +44,7 @@ public class PlayerEntityRendererMixin {
     }
     
     private boolean isFirstPersonView() {
-        net.minecraft.client.MinecraftClient client = net.minecraft.client.MinecraftClient.getInstance();
-        return client.options.perspective == 0; // 0 = first person, 1 = third person back, 2 = third person front
+        MinecraftClient client = MinecraftClient.getInstance();
+        return client.options.getPerspective().isFirstPerson();
     }
 }
