@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'fabric-loom' version '1.9-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -10,48 +10,27 @@ archivesBaseName = "smolpeople"
 repositories {
     mavenCentral()
     maven { url = 'https://maven.fabricmc.net/' }
-    maven { url = 'https://libraries.minecraft.net/' }
 }
 
 dependencies {
-    // Minimal dependencies - just what we need to compile
-    compileOnly 'com.mojang:minecraft:1.12.2'
-    compileOnly 'net.fabricmc:fabric-loader:0.14.21'
-    compileOnly 'com.google.code.gson:gson:2.10.1'
-    compileOnly 'org.apache.logging.log4j:log4j-api:2.17.2'
+    minecraft "com.mojang:minecraft:1.21.4"
+    mappings "net.fabricmc:yarn:1.21.4+build.1:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.16.14"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.110.5+1.21.4"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
-    // Ignore missing classes during compilation
-    options.compilerArgs += ['-Xlint:none', '-nowarn']
 }
-
-jar {
-    archiveBaseName = 'smolpeople'
-    archiveVersion = '1.0.0'
-    
-    // Include all source files
-    from sourceSets.main.output
-    
-    // Fabric mod manifest
-    manifest {
-        attributes([
-            'Fabric-ModJson': 'fabric.mod.json'
-        ])
-    }
-}
-
-// Task to create a basic JAR even if compilation has warnings
-task createBasicJar(type: Jar) {
-    archiveBaseName = 'smolpeople-basic'
-    from sourceSets.main.allSource
-    from 'src/main/resources'
-}
-
-build.dependsOn createBasicJar
